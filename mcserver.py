@@ -28,14 +28,35 @@ def home():
 @app.route("/search",methods=['POST'])
 def search_results():
     keywords = request.form['keywords']
-    now = datetime.datetime.now()
+    fmonth = int(request.form['fmonth'])
+    fday = int(request.form['fday'])
+    fyear = int(request.form['fyear'])
+    tmonth = int(request.form['fmonth'])
+    tday = int(request.form['tday'])
+    tyear = int(request.form['tyear'])
+    fromdate = datetime.date(fyear, fmonth, fday)
+    todate = datetime.date(tyear, tmonth, tday)
+
     results = mc.sentenceCount(keywords,
-        solr_filter=[mc.publish_date_query( datetime.date( 2015, 1, 1), 
-                                            datetime.date( now.year, now.month, now.day) ),
-                     'media_sets_id:1' ])
-    return render_template("search-results.html", 
-        keywords=keywords, sentenceCount=results['count'] )
+        solr_filter=[mc.publish_date_query(fromdate,
+                                            todate),
+                     'media_sets_id:1'])
+
+    splitanalysis = mc.sentenceCount(keywords,
+                                    solr_filter=[mc.publish_date_query(fromdate,
+                                                                       todate),
+                                                 'media_sets_id:1'], split=1)
+
+
+    return render_template("search-results.html",
+        keywords=keywords, sentenceCount=results['count'], splitanalysis=splitanalysis) # splitanalysis['split']
+
+
 
 if __name__ == "__main__":
     app.debug = True
     app.run()
+
+#
+# datetime.date( 2015, 1, 1),
+# datetime.date( now.year, now.month, now.day) ),

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Search Results{% endblock %}
+
+{% block content %}
+
+<div class="row">
+
+  <div class="col-md-12">
+  
+    <h3>Search Results</h3>
+
+    <p>You searched for "{{keywords}}"</p>
+
+    <p>In the US Mainstream Media online there have {{ sentenceCount }} sentences matching your search in the period you mentioned.</p>
+
+    <p>Search Split:</p>
+
+    <p> {{ splitanalysis }} </p>
+  </div>
+
+</div>    
+
+<!--<meta charset="utf-8">-->
+
+<!--&lt;!&ndash; load D3js &ndash;&gt;-->
+<!--<script src="//d3plus.org/js/d3.js"></script>-->
+
+<!--&lt;!&ndash; load D3plus after D3js &ndash;&gt;-->
+<!--<script src="//d3plus.org/js/d3plus.js"></script>-->
+
+<!--&lt;!&ndash; create container element for visualization &ndash;&gt;-->
+<!--<div id="viz"></div>-->
+
+<!--<script>-->
+  <!--// sample data array-->
+  <!--var sample_data = {{ splitanalysis }}-->
+  <!--// instantiate d3plus-->
+  <!--var visualization = d3plus.viz()-->
+    <!--.container("#viz")  // container DIV to hold the visualization-->
+    <!--.data(sample_data)  // data to use with the visualization-->
+    <!--.type("line")       // visualization type-->
+    <!--.id("name")         // key for which our data is unique on-->
+    <!--.text("name")       // key to use for display text-->
+    <!--.y("value")         // key to use for y-axis-->
+    <!--.x("year")          // key to use for x-axis-->
+    <!--.draw()             // finally, draw the visualization!-->
+<!--</script>-->
+
+{% endblock %}
